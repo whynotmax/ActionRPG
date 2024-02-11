@@ -3,7 +3,7 @@ package dev.mzcy.panel;
 import javax.swing.*;
 import java.awt.*;
 
-public class GamePanel extends JPanel {
+public class GamePanel extends JPanel implements Runnable {
 
     // SCREEN SETTINGS
     private static final int ORIGINAL_TILE_SIZE = 16;
@@ -14,12 +14,32 @@ public class GamePanel extends JPanel {
     private static final int SCREEN_WIDTH = ACTUAL_TILE_SIZE * MAX_SCREEN_COL;  //768px
     private static final int SCREEN_HEIGHT = ACTUAL_TILE_SIZE * MAX_SCREEN_ROW; //576px
 
+    Thread gameThread;
+
     public GamePanel() {
 
         this.setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
         this.setBackground(Color.black);
         this.setDoubleBuffered(true);
 
+
     }
 
+    public void startGameThread() {
+
+        gameThread = new Thread(this);
+        gameThread.start();
+    }
+
+    @Override
+    public void run() {
+
+        while (gameThread != null) {
+
+            //TODO Following:
+            // 1 UPDATE: update information such as character position
+            // 2 DRAW: draw the screen with the updated information
+        }
+
+    }
 }
