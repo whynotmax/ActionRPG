@@ -35,11 +35,22 @@ public class GamePanel extends JPanel implements Runnable {
     public void run() {
 
         while (gameThread != null) {
-
-            //TODO Following:
-            // 1 UPDATE: update information such as character position
-            // 2 DRAW: draw the screen with the updated information
+            update();
+            repaint();
         }
 
     }
+
+    public void update() {
+
+    }
+
+    public void paintComponent(Graphics graphics) {
+        super.paintComponent(graphics);
+        Graphics2D graphics2D = (Graphics2D) graphics;
+        graphics2D.setColor(Color.white);
+        graphics2D.fillRect(100, 100, ACTUAL_TILE_SIZE, ACTUAL_TILE_SIZE);
+        graphics2D.dispose();
+    }
+
 }
