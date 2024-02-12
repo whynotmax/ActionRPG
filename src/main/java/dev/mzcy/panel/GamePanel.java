@@ -1,18 +1,22 @@
 package dev.mzcy.panel;
 
 import dev.mzcy.keys.KeyHandler;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.swing.*;
 import java.awt.*;
 
+@Getter
+@Setter
 public class GamePanel extends JPanel implements Runnable {
 
     // SCREEN SETTINGS
     private static final int ORIGINAL_TILE_SIZE = 16;
-    private static int SCALE_FACTOR = 3;
-    private static final int ACTUAL_TILE_SIZE = ORIGINAL_TILE_SIZE * SCALE_FACTOR;
+    private static int SCALE_FACTOR = 3; //Should be able to change in the settings later on!
     private static final int MAX_SCREEN_COL = 16;
     private static final int MAX_SCREEN_ROW = 12;
+    private static final int ACTUAL_TILE_SIZE = ORIGINAL_TILE_SIZE * SCALE_FACTOR;
     private static final int SCREEN_WIDTH = ACTUAL_TILE_SIZE * MAX_SCREEN_COL;  //768px
     private static final int SCREEN_HEIGHT = ACTUAL_TILE_SIZE * MAX_SCREEN_ROW; //576px
     private static final int FPS = 60;
@@ -34,12 +38,18 @@ public class GamePanel extends JPanel implements Runnable {
 
     }
 
+    /**
+     * Starts the game thread by creating a new thread and starting it.
+     */
     public void startGameThread() {
 
         gameThread = new Thread(this);
         gameThread.start();
     }
 
+    /**
+     * The run method that handles the game loop and updates the game state.
+     */
     @Override
     public void run() {
 
@@ -62,6 +72,9 @@ public class GamePanel extends JPanel implements Runnable {
 
     }
 
+    /**
+     * Updates the player's position based on the keyHandler input.
+     */
     public void update() {
         if (keyHandler.up) {
             playerY -= playerSpeed;
@@ -77,6 +90,12 @@ public class GamePanel extends JPanel implements Runnable {
         }
     }
 
+    /**
+     * Paints the component using the specified graphics.
+     *
+     * @param  graphics  the graphics object to paint with
+     * @return          void
+     */
     public void paintComponent(Graphics graphics) {
         super.paintComponent(graphics);
         Graphics2D graphics2D = (Graphics2D) graphics;
